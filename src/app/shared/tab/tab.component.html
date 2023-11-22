@@ -1,3 +1,6 @@
-<ng-content>
-    
-</ng-content>
+ <!-- //the tab component is a simple container that will hold the content of the tab
+ class.hidden is a utility class that will hide the content of the tab if the tab is not active -->
+<div [class.hidden]="!active">
+    <ng-content>
+    </ng-content>
+</div>
