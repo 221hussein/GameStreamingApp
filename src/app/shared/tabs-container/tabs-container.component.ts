@@ -16,7 +16,7 @@ export class TabsContainerComponent implements AfterContentInit{
   constructor() { }
 
   ngAfterContentInit(): void {
-   this.tabs.
+   this.tabs?.first
   }
 
 }
