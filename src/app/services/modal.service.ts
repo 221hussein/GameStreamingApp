@@ -12,7 +12,7 @@ export class ModalService {
 
   // private visible = false
 
-  public modals : IModal[] = [];
+  private modals : IModal[] = [];
 
 
   constructor() {}
@@ -22,6 +22,13 @@ export class ModalService {
       id,
       visible: false
     })
+  }
+
+  // we will call this method when the component is destroyed
+  unregister(id: string) {
+    this.modals = this.modals.filter(
+      element => element.id !== id
+    )
   }
 
    isModalOpen(id: string) : boolean {

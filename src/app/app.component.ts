@@ -1,22 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalService } from './services/modal.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  showModal = true
+export class AppComponent {
 
-  constructor(public  modal : ModalService) { }
-
-  ngOnInit(): void {
-    setInterval(() => {
-      this.showModal = !this.showModal
-      console.log(this.modal.modals)
-    },1000
-    )
-  }
 }
 
