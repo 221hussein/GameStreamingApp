@@ -26,13 +26,18 @@ export class TabsContainerComponent implements AfterContentInit{
     this.selectTab(this.tabs!.first)
    }
   }
+
   selectTab(tab: TabComponent) {
     //loop through all tabs
     this.tabs?.forEach(tab => {
       tab.active = false
     }) 
 
+    //activate the tab the user has clicked on.
     tab.active = true
+    
+    //this will automatically prevent the default action of the event from being triggered
+    return false
   }
 
   
