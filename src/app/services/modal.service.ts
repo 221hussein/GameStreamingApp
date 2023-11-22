@@ -12,7 +12,7 @@ export class ModalService {
 
   // private visible = false
 
-  private modals : IModal[] = [];
+  public modals : IModal[] = [];
 
 
   constructor() {}
