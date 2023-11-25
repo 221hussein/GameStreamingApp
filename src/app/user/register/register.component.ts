@@ -28,8 +28,15 @@ export class RegisterComponent {
     Validators.email
   ])
 
-  password = new FormControl('')
-  password_confirmation = new FormControl('')
+  password = new FormControl('',[
+    Validators.required,
+    Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm),
+    Validators.minLength(8),
+    Validators.maxLength(20)
+  ])
+  password_confirmation = new FormControl('',[
+    Validators.required,
+  ])
   phoneNumber = new FormControl('')
   
   registerForm = new FormGroup({
