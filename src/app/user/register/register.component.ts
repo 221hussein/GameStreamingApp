@@ -14,13 +14,17 @@ export class RegisterComponent {
     name: new FormControl('',[
       Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(20)
+      // Validators.maxLength(20)
     ]),
+
     age: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl(''),
     password_confirmation: new FormControl(''),
     phoneNumber: new FormControl(''),
   });
+
+  
+
 }
 
