@@ -5,6 +5,8 @@ import { TabsContainerComponent } from './tabs-container/tabs-container.componen
 import { TabComponent } from './tab/tab.component';
 import { InputComponent } from './input/input.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 // import { ModalService } from '../services/modal.service';
 
 
@@ -17,7 +19,9 @@ import { InputComponent } from './input/input.component';
     InputComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    // this import is needed for the input component to work
+    ReactiveFormsModule
   ],exports:[
     ModalComponent,
     TabsContainerComponent,
