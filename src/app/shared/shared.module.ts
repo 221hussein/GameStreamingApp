@@ -6,7 +6,7 @@ import { TabComponent } from './tab/tab.component';
 import { InputComponent } from './input/input.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 // import { ModalService } from '../services/modal.service';
 
 
@@ -21,13 +21,16 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     // this import is needed for the input component to work
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskDirective, NgxMaskPipe
+  
   ],exports:[
     ModalComponent,
     TabsContainerComponent,
     TabComponent,
     InputComponent
   ],providers:[
+    provideNgxMask()
     // ModalService
   ]
 })
