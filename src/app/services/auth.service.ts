@@ -27,12 +27,20 @@ export class AuthService {
         userData.password as string
     )
 
+    if (!userCredential.user) {
+      throw new Error('User is not defined')
+    }
+
     // this for creating a new collection in the database
-    await this.usersCollection.add({
+    await this.usersCollection.doc(userCredential.user?.uid).set({
       name : userData.name,
       age : userData.age,
       email : userData.email,
       phoneNumber : userData.phoneNumber,
+    })
+
+    await userCredential.user.updateProfile({
+        displayName : userData.name
     })
   }
 }
