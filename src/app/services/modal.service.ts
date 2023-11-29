@@ -14,7 +14,6 @@ export class ModalService {
 
   private modals : IModal[] = [];
 
-
   constructor() {}
 
   register(id: string) {
@@ -50,5 +49,5 @@ export class ModalService {
     }
 
 
-    
+
 }

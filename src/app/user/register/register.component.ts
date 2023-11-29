@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 import {FormGroup , FormControl, Validators} from '@angular/forms';
+import {AuthService} from "../../services/auth.service";
 
-import {AngularFireAuth} from '@angular/fire/compat/auth';
-import {AngularFirestore} from "@angular/fire/compat/firestore";
+import IUser from "../../models/user.models";
+
 
 @Component({
   selector: 'app-register',
@@ -13,8 +14,9 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 export class RegisterComponent {
 
-  constructor(private auth : AngularFireAuth,
-              private db : AngularFirestore) { }
+  constructor(
+      private auth: AuthService
+  ) { }
 
   // user shouldn't be able to submit the form if
   // there is any mysteque
@@ -26,7 +28,7 @@ export class RegisterComponent {
     // Validators.maxLength(20)
   ])
 
-  age = new FormControl('',[
+  age = new FormControl<number | null>(null,[
   Validators.required,
   Validators.min(18),
   Validators.max(110)
@@ -72,24 +74,10 @@ alertColor = 'blue'
     this.alertColor = 'blue'
     this.inSubmission = true
 
-    const {
-      email,
-      password,
-    } = this.registerForm.value;
-
     try {
-      const userCredential = await this.auth.createUserWithEmailAndPassword (
-          email as string ,
-          password as string
+      this.auth.createUser(
+          this.registerForm.value as IUser
       )
-
-      // this for creating a new collection in the database
-      await this.db.collection('users').add({
-        name : this.name.value,
-        age : this.age.value,
-        email : this.email.value,
-        phoneNumber : this.phoneNumber.value
-      })
     }catch (e) {
       console.error(e)
 
