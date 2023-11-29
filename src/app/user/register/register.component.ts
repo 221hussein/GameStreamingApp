@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import {FormGroup , FormControl, Validators} from '@angular/forms';
 
 import {AngularFireAuth} from '@angular/fire/compat/auth';
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,8 @@ import {AngularFireAuth} from '@angular/fire/compat/auth';
 
 export class RegisterComponent {
 
-  constructor(private auth : AngularFireAuth) { }
+  constructor(private auth : AngularFireAuth,
+              private db : AngularFirestore) { }
 
   // user shouldn't be able to submit the form if
   // there is any mysteque
@@ -80,7 +82,14 @@ alertColor = 'blue'
           email as string ,
           password as string
       )
-      console.log(userCredential)
+
+      // this for creating a new collection in the database
+      await this.db.collection('users').add({
+        name : this.name.value,
+        age : this.age.value,
+        email : this.email.value,
+        phoneNumber : this.phoneNumber.value
+      })
     }catch (e) {
       console.error(e)
 
