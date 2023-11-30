@@ -19,7 +19,7 @@ export class RegisterComponent {
   ) { }
 
   // user shouldn't be able to submit the form if
-  // there is any mysteque
+  // there is any mystique
   inSubmission = false;
 
   name = new FormControl('',[
