@@ -4,10 +4,22 @@ import { AppModule } from './app/app.module';
 
 import { environment } from './environments/environment.development';
 import { enableProdMode } from '@angular/core';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+
 
 if(environment.developement) {
   enableProdMode();
 }
+// Initialize Firebase before Angular is bootstrapped
+firebase.initializeApp(environment.firebase);
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+let appInit = false;
+firebase.auth().onAuthStateChanged(() => {
+  if (!appInit) {
+    platformBrowserDynamic().bootstrapModule(AppModule)
+      .catch(err => console.error(err));
+  }
+  appInit = true;
+})
+
