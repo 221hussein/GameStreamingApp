@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
-
+import {Observable, map} from "rxjs";
 import IUser from "../models/user.models";
 
 
@@ -12,10 +12,16 @@ import IUser from "../models/user.models";
 export class AuthService {
 
   private usersCollection : AngularFirestoreCollection<IUser>
-
+  public isAuthenticated$ : Observable<boolean>
   constructor(private auth : AngularFireAuth,
               private db : AngularFirestore) {
     this.usersCollection = db.collection<IUser>('users')
+    this.isAuthenticated$ =  auth.user.pipe(
+        // !! will return true if the value is not null or undefined
+         map(user => !!user)
+        // solution 2
+        //map(user => Boolean(user))
+    )
   }
 
   public async createUser (userData: IUser) {
